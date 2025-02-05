@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 'use strict';
 
 const fs = require('fs');
@@ -8,14 +9,19 @@ function copyFile() {
   const pathToInsertFile = args[1];
 
   if (pathToCopyFile === pathToInsertFile) {
+    console.log('Source and destination paths are the same. No action taken.');
+
     return;
   }
 
   try {
     fs.cpSync(pathToCopyFile, pathToInsertFile);
+
+    console.log(
+      `File successfully copied from ${pathToCopyFile} to ${pathToInsertFile}`,
+    );
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('Error: ', err.code);
+    console.error(`Error occurred while copying the file: ${err.code}`);
   }
 }
 
